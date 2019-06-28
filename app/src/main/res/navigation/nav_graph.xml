@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/home_fragment">
+
+    <fragment
+            android:id="@+id/home_fragment"
+            android:name="com.example.passwordmanager.ui.HomeFragment"
+            android:label="Home"
+            tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/action_home_fragment_to_add_password_fragment"
+                app:destination="@id/add_password_fragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/add_password_fragment"
+            android:name="com.example.passwordmanager.ui.AddPasswordFragment"
+            android:label="Add Password"
+            tools:layout="@layout/fragment_add_password">
+        <action
+                android:id="@+id/action_add_password_fragment_to_home_fragment"
+                app:destination="@id/home_fragment"/>
+    </fragment>
+
+</navigation>
