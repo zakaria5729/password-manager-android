@@ -1,9 +1,6 @@
 package com.example.passwordmanager.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface PasswordDao {
@@ -14,6 +11,9 @@ interface PasswordDao {
 
     @Update
     suspend fun updatePassword(password: Password)
+
+    @Delete
+    suspend fun deletePassword(password: Password)
 
     @Query("SELECT * FROM password ORDER BY id DESC")
     suspend fun getAllPasswords(): List<Password>

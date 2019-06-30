@@ -26,8 +26,7 @@ class HomeFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         recycler_view.setHasFixedSize(true)
-        //recycler_view.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        recycler_view.layoutManager = LinearLayoutManager(context)
+        recycler_view.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         launch {
             context?.let {

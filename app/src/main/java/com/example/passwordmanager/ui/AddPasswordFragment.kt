@@ -1,6 +1,7 @@
 package com.example.passwordmanager.ui
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.*
@@ -19,6 +20,7 @@ class AddPasswordFragment : BaseFragment() {
     private var passwordArgs: Password? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_add_password, container, false)
     }
 
@@ -77,6 +79,40 @@ class AddPasswordFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_delete ->
+                if (passwordArgs != null) {
+                    deletePassword()
+                } else {
+                    context?.showToast("Empty password can not be deleted")
+                }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deletePassword() {
+        AlertDialog.Builder(context).apply {
+            setTitle("Are you sure to delete?")
+            setMessage("You can not undo this operation")
+            setPositiveButton("Delete") {_, _ ->
+                launch {
+                    PasswordDatabase(context).getPasswordDao().deletePassword(passwordArgs!!)
+                    activity!!.onBackPressed()
+                }
+            }
+            setNegativeButton("Cancel") {_, _ ->
+
+            }
+        }.create().show()
     }
 
     private fun View.hideKeyboard() {

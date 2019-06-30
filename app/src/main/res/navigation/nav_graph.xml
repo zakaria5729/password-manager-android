@@ -29,7 +29,6 @@
                 android:name="Password"
                 app:nullable="true"
                 android:defaultValue="@null"/>
-
     </fragment>
 
 </navigation>
